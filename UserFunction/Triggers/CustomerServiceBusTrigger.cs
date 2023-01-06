@@ -17,7 +17,7 @@ namespace UserFunction.Triggers
         }
 
         [FunctionName("SendEmailTrigger")]
-        public void SendEmail([ServiceBusTrigger("Customer", "SendEmail", Connection = "ServiceBus")] string payload)
+        public void SendEmail([ServiceBusTrigger("Customer", "SendEmail", Connection = "ConnectionStrings:ServiceBus")] string payload)
         {
             _logger.LogInformation($"C# ServiceBus topic trigger function processed message: {payload}");
 

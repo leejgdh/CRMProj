@@ -21,7 +21,7 @@ namespace FranchiseeFunction.Services
             _context = context;
         }
 
-        public async Task<TaskBase<Franchisee>> CreateFranchisee(RequestCreateFranchisee req)
+        public async Task<TaskBase<Franchisee>> CreateAsync(RequestCreateFranchisee req)
         {
             TaskBase<Franchisee> result = new TaskBase<Franchisee>(false);
 

@@ -17,7 +17,6 @@ namespace FranchiseeFunction.Triggers
     {
         private IFranchiseeService _franchiseeService;
 
-
         public FranchiseeHttpTrigger(
             IFranchiseeService franchiseeService
             )
@@ -33,7 +32,7 @@ namespace FranchiseeFunction.Triggers
             ILogger log)
         {
 
-            var res = await _franchiseeService.CreateFranchisee(req);
+            var res = await _franchiseeService.CreateAsync(req);
 
             if (res.IsSuccess)
             {

@@ -1,4 +1,6 @@
-﻿namespace UserFunction.Models.DTO.Customer
+﻿using System;
+
+namespace UserFunction.Models.DTO.Customer
 {
     public class RequestCreateCustomer
     {
@@ -8,7 +10,9 @@
 
         public string Password { get; set; }
 
-        public string ClassName { get; set; }
+        public string Tel { get; set; } 
+
+        public Guid? ClassId { get; set; }
 
     }
 }

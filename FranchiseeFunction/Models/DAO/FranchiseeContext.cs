@@ -16,6 +16,8 @@ namespace FranchiseeFunction.Models.DAO
 
         public DbSet<Franchisee> Franchisees { get; set; }
 
+        public DbSet<Class> Classes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +27,12 @@ namespace FranchiseeFunction.Models.DAO
                 .ToContainer("Franchisees")
                 .HasPartitionKey(nameof(Franchisee.Name))
                 .HasKey(e => e.BizNum);
+
+
+            modelBuilder.Entity<Class>()
+                .ToContainer("Classes")
+                .HasPartitionKey(nameof(Class.BizNum))
+                .HasKey(e => e.Id);
 
         }
     }

@@ -1,5 +1,5 @@
 ﻿using FranchiseeFunction.Models.DAO;
-using FranchiseeFunction.Models.DTO.Franchisee;
+using FranchiseeFunction.Models.DTO.Class;
 using SharedProject.Models.Base;
 using System;
 using System.Collections.Generic;
@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace FranchiseeFunction.Interfaces
 {
-    public interface IFranchiseeService
+    public interface IClassService
     {
-        Task<TaskBase<Franchisee>> CreateAsync(RequestCreateFranchisee req);
+        Task<TaskBase<Class>> CreateAsync(RequestCreateClass req);
+
+        Task<TaskBase<Class>> InAssignmentCustomerAsync(Guid classId, Class._Customer customer);
     }
 }

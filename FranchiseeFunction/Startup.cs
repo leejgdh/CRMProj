@@ -5,11 +5,6 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 [assembly: FunctionsStartup(typeof(FranchiseeFunction.Startup))]
 namespace FranchiseeFunction
@@ -27,6 +22,8 @@ namespace FranchiseeFunction
             builder.Services.AddDbContext<FranchiseeContext>(e => e.UseCosmos(configuration.GetConnectionString("DHCosmos"), "Franchisee"));
 
             builder.Services.AddTransient<IFranchiseeService, FranchiseeService>();
+            builder.Services.AddTransient<IClassService, ClassService>();
+
         }
     }
 }

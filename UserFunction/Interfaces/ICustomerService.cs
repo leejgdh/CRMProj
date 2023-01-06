@@ -7,6 +7,6 @@ namespace UserFunction.Interfaces
 {
     public interface ICustomerService
     {
-        Task<TaskBase<Customer>> CreateCustomer(RequestCreateCustomer req);
+        Task<TaskBase<Customer>> CreateAsync(RequestCreateCustomer req);
     }
 }

@@ -41,7 +41,7 @@ namespace UserFunction.Triggers
             ILogger log)
         {
 
-            var res = await _customerService.CreateCustomer(req);
+            var res = await _customerService.CreateAsync(req);
 
             if (res.IsSuccess)
             {
@@ -51,7 +51,8 @@ namespace UserFunction.Triggers
                 {
                     Name = req.Name,
                     Email = req.Email,
-                    ClassName = req.ClassName,
+                    Tel = req.Tel,
+                    ClassId = req.ClassId,
                 };
 
                 await _serviceBusClient.SendMessageAsync(msg);

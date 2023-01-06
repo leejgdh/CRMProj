@@ -21,7 +21,7 @@ namespace UserFunction.Services
             _context = context;
         }
 
-        public async Task<TaskBase<Customer>> CreateCustomer(RequestCreateCustomer req)
+        public async Task<TaskBase<Customer>> CreateAsync(RequestCreateCustomer req)
         {
             TaskBase<Customer> result = new TaskBase<Customer>(false);
 
@@ -30,6 +30,7 @@ namespace UserFunction.Services
             {
                 Name = req.Name,
                 Email = req.Email,
+                Tel = req.Tel,
                 Password = req.Password,
             };
 
