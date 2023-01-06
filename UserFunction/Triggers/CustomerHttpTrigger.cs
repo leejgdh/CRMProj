@@ -34,11 +34,22 @@ namespace UserFunction.Triggers
         }
 
 
+        [FunctionName("GetCustomers")]
+        public IActionResult GetCustomers(
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] RequestCreateCustomer req,
+            ILogger log)
+        {
+            var datas = _customerService.GetAll();
+
+            return new OkObjectResult(datas);
+        }
+
+
 
         [FunctionName("CreateCustomer")]
         public async Task<IActionResult> CreateCustomer(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] RequestCreateCustomer req,
-            ILogger log)
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] RequestCreateCustomer req,
+        ILogger log)
         {
 
             var res = await _customerService.CreateAsync(req);
@@ -63,7 +74,7 @@ namespace UserFunction.Triggers
             {
                 return new BadRequestObjectResult(res.Message);
             }
-            
+
         }
     }
 }

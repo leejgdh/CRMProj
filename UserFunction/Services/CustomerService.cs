@@ -51,5 +51,12 @@ namespace UserFunction.Services
 
             return result;
         }
+
+        public IQueryable<Customer> GetAll()
+        {
+            var datas = _context.Customers.AsQueryable();
+
+            return datas;
+        }
     }
 }

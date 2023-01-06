@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  franchiseefunction:
+    image: ${DOCKER_REGISTRY-}franchiseefunction
+    build:
+      context: .
+      dockerfile: FranchiseeFunction/Dockerfile
+
+  userfunction:
+    image: ${DOCKER_REGISTRY-}userfunction
+    build:
+      context: .
+      dockerfile: UserFunction/Dockerfile
+

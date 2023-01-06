@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  franchiseefunction:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+  userfunction:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
