@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using SharedProject.Models.EventMsg;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 using UserFunction.Options;
 
 namespace UserFunction.Triggers
@@ -21,11 +23,18 @@ namespace UserFunction.Triggers
         public CustomerServiceBusTrigger(
 
             ILogger<CustomerServiceBusTrigger> log,
-            IOptionsSnapshot<SendgridOption> sendgridOption
+            IOptionsSnapshot<SendgridOption> sendgridOption,
+            IOptionsSnapshot<TwilioOption> twilioOption
             )
         {
             _logger = log;
             _sendgridClient = sendgridOption.Value != null ? new SendGridClient(sendgridOption.Value.ApiKey) : null;
+
+            if (twilioOption != null)
+            {
+                TwilioClient.Init(twilioOption.Value.AccountId, twilioOption.Value.ApiKey);
+            }
+
         }
 
         [FunctionName("SendEmailTrigger")]
@@ -46,7 +55,37 @@ namespace UserFunction.Triggers
             var msg = MailHelper.CreateSingleEmail(from_email, to_email, subject, plainTextContent, htmlContent);
 
 
-            var response = await _sendgridClient.SendEmailAsync(msg);
+            //var response = await _sendgridClient.SendEmailAsync(msg);
+        }
+
+        [FunctionName("SendSMSTrigger")]
+        public async Task SendSMS([ServiceBusTrigger("Customer", "SendSMS", Connection = "ConnectionStrings:ServiceBus")] string payload)
+        {
+            _logger.LogInformation($"C# ServiceBus topic trigger function processed message: {payload}");
+
+            var data = JsonConvert.DeserializeObject<SendCreateCustomerMsg>(payload);
+
+            if (!string.IsNullOrWhiteSpace(data.Tel))
+            {
+                try
+                {
+
+                    //var message = await MessageResource.CreateAsync(
+                    //    body: "CRM 회원가입 축하함당 전번은 근데 고정임",
+                    //    from: new Twilio.Types.PhoneNumber("+15092859280"), // fix from number
+                    //    to: new Twilio.Types.PhoneNumber($"+82{data.Tel}")
+                    //);
+
+                    //var sid = message.Sid;
+                }
+                catch (Exception ex)
+                {
+
+
+                }
+            }
+
+
         }
     }
 }

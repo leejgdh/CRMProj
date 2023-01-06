@@ -24,6 +24,7 @@ namespace UserFunction
 
             //Options
             builder.Services.Configure<SendgridOption>(configuration.GetSection("Sendgrid"));
+            builder.Services.Configure<TwilioOption>(configuration.GetSection("Twilio"));
 
             builder.Services.AddHttpClient();
         }
