@@ -9,6 +9,9 @@
     <Import_RootNamespace>SharedProject</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ServiceBusMessageHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Base\IServiceBusEventBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Base\TaskBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\EventMsg\SendCreateCustomerMsg.cs" />
   </ItemGroup>
 </Project>

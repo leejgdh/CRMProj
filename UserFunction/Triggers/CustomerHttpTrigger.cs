@@ -9,6 +9,10 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using UserFunction.Interfaces;
 using UserFunction.Models.DTO.Customer;
+using Azure.Messaging.ServiceBus;
+using Microsoft.Extensions.Configuration;
+using SharedProject.Models.EventMsg;
+using SharedProject.Helpers;
 
 namespace UserFunction.Triggers
 {
@@ -16,11 +20,16 @@ namespace UserFunction.Triggers
     {
         private ICustomerService _customerService;
 
+        private readonly ServiceBusClient _serviceBusClient;
+
 
         public CustomerHttpTrigger(
+            IConfiguration config,
             ICustomerService customerService
             )
         {
+            _serviceBusClient = new ServiceBusClient(config.GetConnectionString("ServiceBus"));
+
             _customerService = customerService;
         }
 
@@ -36,6 +45,17 @@ namespace UserFunction.Triggers
 
             if (res.IsSuccess)
             {
+                //send message
+
+                SendCreateCustomerMsg msg = new SendCreateCustomerMsg()
+                {
+                    Name = req.Name,
+                    Email = req.Email,
+                    ClassName = req.ClassName,
+                };
+
+                await _serviceBusClient.SendMessageAsync(msg);
+
                 return new OkObjectResult("hello");
             }
             else
