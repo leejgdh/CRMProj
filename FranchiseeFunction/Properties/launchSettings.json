@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "FranchiseeFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7193"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 34279,
+      "useSSL": false
+    }
+  }
+}
